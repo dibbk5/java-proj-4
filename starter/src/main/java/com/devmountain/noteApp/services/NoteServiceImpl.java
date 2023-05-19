@@ -18,13 +18,14 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class NoteServiceImpl {
+public class NoteServiceImpl implements NoteService {
 
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private NoteRepository noteRepository;
 
+    @Override
     @Transactional
     public void addNote(NoteDto noteDto, Long userId){
         Optional<User> userOptional = userRepository.findById(userId);
@@ -33,12 +34,14 @@ public class NoteServiceImpl {
         noteRepository.saveAndFlush(note);
     }
 
+    @Override
     @Transactional
     public void deleteNote(Long noteId){
         Optional<Note> noteOptional = noteRepository.findById(noteId);
         noteOptional.ifPresent(note -> noteRepository.delete(note));
     }
 
+    @Override
     @Transactional
     public void updateNote(NoteDto noteDto){
         Optional<Note> noteOptional = noteRepository.findById(noteDto.getId());
@@ -48,6 +51,7 @@ public class NoteServiceImpl {
         });
     }
 
+    @Override
     public List<NoteDto> getAllNotesForUser(Long userId){
         Optional<User> userOptional = userRepository.findById(userId);
         if (userOptional.isPresent()){
@@ -57,6 +61,7 @@ public class NoteServiceImpl {
         return Collections.emptyList();
     }
 
+    @Override
     public Optional<NoteDto> getNoteById(Long noteId){
         Optional<Note> noteOptional = noteRepository.findById(noteId);
         if (noteOptional.isPresent()){
