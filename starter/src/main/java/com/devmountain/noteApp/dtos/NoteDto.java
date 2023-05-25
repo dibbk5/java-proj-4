@@ -15,6 +15,7 @@ public class NoteDto implements Serializable {
 
     private Long id;
     private String body;
+//    private byte[] image;
     private UserDto userDto;
 
     public NoteDto(Note note){
@@ -24,5 +25,8 @@ public class NoteDto implements Serializable {
         if (note.getBody() != null){
             this.body = note.getBody();
         }
+//        if (note.getImage() != null){
+//            this.image = note.getImage();
+//        }
     }
 }

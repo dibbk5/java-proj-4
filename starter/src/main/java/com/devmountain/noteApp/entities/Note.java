@@ -21,6 +21,10 @@ public class Note {
     @Column(columnDefinition = "text")
     private String body;
 
+//    @Lob
+//    @Column(name = "image")
+//    private byte[] image;
+
     @ManyToOne
     @JsonBackReference
     private User user;
@@ -46,4 +50,12 @@ public class Note {
     public void setBody(String body) {
         this.body = body;
     }
+//
+//    public byte[] getImage() {
+//        return image;
+//    }
+//
+//    public void setImage(byte[] image) {
+//        this.image = image;
+//    }
 }

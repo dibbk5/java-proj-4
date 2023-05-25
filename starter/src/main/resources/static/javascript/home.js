@@ -24,8 +24,9 @@ const handleSubmit = async (e) => {
   e.preventDefault();
   let bodyObj = {
     body: document.getElementById("note-input").value,
+//    image: document.getElementById("customFile"),
   };
-  await AudioDestinationNode(bodyObj);
+  await addNote(bodyObj);
   document.getElementById("note-input").value = "";
 };
 
@@ -85,11 +86,11 @@ async function handleDelete(noteId) {
 ///Helper Functions/////
 
 const createNoteCards = (array) => {
-    noteContainer.innerHTML = ''
-    array.forEach(obj => {
-        let noteCard = document.createElement("div")
-        noteCard.classList.add("m-2")
-        noteCard.innerHTML = `
+  noteContainer.innerHTML = "";
+  array.forEach((obj) => {
+    let noteCard = document.createElement("div");
+    noteCard.classList.add("m-2");
+    noteCard.innerHTML = `
             <div class="card d-flex" style="width: 18rem; height: 18rem;">
                 <div class="card-body d-flex flex-column  justify-content-between" style="height: available">
                     <p class="card-text">${obj.body}</p>
@@ -102,10 +103,10 @@ const createNoteCards = (array) => {
                     </div>
                 </div>
             </div>
-        `
-        noteContainer.append(noteCard);
-    })
-}
+        `;
+    noteContainer.append(noteCard);
+  });
+};
 
 const populateModal = (obj) => {
   noteBody.innerText = "";
@@ -118,6 +119,6 @@ getNotes(userId);
 submitForm.addEventListener("submit", handleSubmit);
 
 updateNoteBtn.addEventListener("click", (e) => {
-  let noteId = e.target.getAttribte("data-note-id");
+  let noteId = e.target.getAttribute("data-note-id");
   handleNoteEdit(noteId);
 });
